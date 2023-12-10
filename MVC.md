@@ -20,6 +20,24 @@ Model, View 사이에서 브릿지 역할 수행
 
 컨트롤러로 들어온 요청을 어떻게 처리할지 결정하여 모델로 요청 전달
 
+Client -(Request)-> Dispatcher Servlet -> Handler Mapping -> Controller -> Message Converter -> HTTP Response -(Response)-> Clinet
+
+#### @RestController
+
+Spring Framework 4 부터 사용 가능</br>
+@Controller에 @ResponseBody가 결합된 Annotation</br>
+컨트롤러 클래스 하위 메서드에 @ResponseBody Annotation을 붙이지 않아도 문자열, JSON 전송 가능</br>
+View를 거치지 않고 HTTP ResponseBody에 직접 Return값을 담아 보냄
+
+#### @RequsetMapping
+
+MVC Handler Mapping을 위해서 DefaultAnnotationHandlerMapping을 이용</br>
+DefaultAnnotationHandlerMapping 매핑정보로 @RequestMapping Annotation을 이용
+
+value: url 설정</br>
+method: GET, POST, DELETE, PUT, PATCH 등</br>
+Spring 4.3부터 사용 가능 (@GetMapping, @PostMapping, @DeleteMapping, @PutMapping, @PatchMapping)
+
 ### Model
 
 데이터 처리 영역
