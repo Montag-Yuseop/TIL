@@ -2,7 +2,7 @@
 
 ## Spring Boot 서비스 구조
 
-![서비스 구조 이미지](service.png)
+![서비스 구조 이미지](img/service.png)
 
 ## 요소
 
