@@ -1,4 +1,4 @@
-package com.test.tddtest.data.dto;
+package com.test.tddtest.dto;
 
 import com.test.tddtest.data.entity.ProductEntity;
 import lombok.AllArgsConstructor;

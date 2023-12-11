@@ -1,4 +1,4 @@
-package com.test.tddtest.data.dto;
+package com.test.tddtest.dto;
 
 import lombok.Data;
 @Data

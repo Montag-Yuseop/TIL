@@ -1,6 +1,6 @@
 package com.test.tddtest.controller;
 
-import com.test.tddtest.data.dto.MemberDto;
+import com.test.tddtest.dto.MemberDto;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;

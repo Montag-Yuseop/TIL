@@ -1,20 +1,17 @@
 package com.test.tddtest.data.dao.impl;
 
 import com.test.tddtest.data.entity.ProductEntity;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import com.test.tddtest.data.dao.ProductDao;
 import com.test.tddtest.data.repository.ProductRepository;
 
-
+@Slf4j
 @Service
+@RequiredArgsConstructor
 public class ProductDaoImpl implements ProductDao {
-    ProductRepository productRepository;
-
-    @Autowired
-    public ProductDaoImpl(ProductRepository productRepository){
-        this.productRepository = productRepository;
-    }
+    private final ProductRepository productRepository;
 
     @Override
     public ProductEntity saveProduct(ProductEntity productEntity) {
