@@ -1,6 +1,6 @@
 package com.test.tddtest.controller;
 
-import com.test.tddtest.dto.MemberDTO;
+import com.test.tddtest.data.dto.MemberDto;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -26,7 +26,7 @@ public class PostController {
     }
 
     @PostMapping("/member2")
-    public String postMemberDto(@RequestBody MemberDTO memberDTO) {
+    public String postMemberDto(@RequestBody MemberDto memberDTO) {
         return memberDTO.toString();
     }
 

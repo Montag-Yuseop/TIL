@@ -1,6 +1,6 @@
 package com.test.tddtest.controller;
 
-import com.test.tddtest.dto.MemberDTO;
+import com.test.tddtest.data.dto.MemberDto;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
@@ -59,7 +59,7 @@ public class GetController {
     // DTO를 받아서 사용
     // http://localhost:8080/api/v1/get-api/request3?name=hello&email=hello.hello&organization=hello.org
     @GetMapping("/request3")
-    public String getRequestParam3(MemberDTO memberDto) {
+    public String getRequestParam3(MemberDto memberDto) {
 
         return memberDto.toString();
     }
