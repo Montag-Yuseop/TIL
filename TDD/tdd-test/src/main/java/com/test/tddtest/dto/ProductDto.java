@@ -1,6 +1,7 @@
 package com.test.tddtest.dto;
 
 import com.test.tddtest.data.entity.ProductEntity;
+import jakarta.validation.constraints.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -12,9 +13,18 @@ import lombok.NoArgsConstructor;
 @Builder
 public class ProductDto {
 
+    @NotBlank
     private String productId;
+
+    @NotNull
     private String productName;
+
+    @NotNull
+    @Min(500)
+    @Max(1000)
     private int productPrice;
+
+    @NotNull
     private int productStock;
 
     public ProductEntity toEntity() {

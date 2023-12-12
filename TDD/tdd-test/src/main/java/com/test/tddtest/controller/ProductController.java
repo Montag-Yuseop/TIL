@@ -2,7 +2,12 @@ package com.test.tddtest.controller;
 
 import com.test.tddtest.dto.ProductDto;
 import com.test.tddtest.service.ProductService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -10,21 +15,38 @@ import org.springframework.web.bind.annotation.*;
 @RequiredArgsConstructor
 public class ProductController {
     private final ProductService productService;
+    private final Logger log = LoggerFactory.getLogger(ProductController.class);
 
-    @GetMapping("/product/{productId}")
+    @GetMapping("/{productId}")
     public ProductDto getProduct(@PathVariable String productId) {
-        return productService.getProduct(productId);
+        long startTime = System.currentTimeMillis();
+        log.info("[ProductController] perform {} of API", "get Product");
+
+        ProductDto productDto = productService.getProduct(productId);
+        log.info("[ProductController] Response :: productID = {}, productName = {}, productPrice = {}, productStock = {}, ResponseTime = {}ms", productDto.getProductId(), productDto.getProductName(), productDto.getProductPrice(), productDto.getProductStock(), (System.currentTimeMillis() - startTime));
+
+        return productDto;
     }
 
     @PostMapping("/create")
-    public ProductDto createProduct(@RequestBody ProductDto productDto) {
+    public ResponseEntity<ProductDto> createProduct(@Valid @RequestBody ProductDto productDto) {
 
         String productId = productDto.getProductId();
         String productName = productDto.getProductName();
         int productPrice = productDto.getProductPrice();
         int productStock = productDto.getProductStock();
 
-        return productService.saveProduct(productId, productName, productPrice, productStock);
+//        log.trace("log_trace"); // 안나온다
+//        log.debug("log_debug"); // 안나온다
+//        log.info("log_info");
+//        log.warn("log_warn");
+//        log.error("log_error");
+
+        ProductDto response = productService.saveProduct(productId, productName, productPrice, productStock);
+
+        log.info("[createProduct] Response >> productId : {}, productName : {}, productPrice : {}, product Stock: {}", response.getProductId(), response.getProductName(), response.getProductPrice(), response.getProductStock());
+
+        return ResponseEntity.status(HttpStatus.OK).body(productDto);
     }
 
     @DeleteMapping("/delete/{productId}")
