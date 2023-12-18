@@ -55,3 +55,18 @@ Exception.class는 최상위 클래스로 하위 세부 예외 처리 클래스�
 
 - 자식 클래스가 더 높은 우선순위를 가진다
 - 컨트롤러 예외처리가 우선순위를 가진다(ControllerAdvice vs Controller)
+
+## Exception의 구조
+
+![Exception 구조](img/Exception.png)
+
+## Throwable의 구조
+
+![Throwable 구조](img/Throwable.png)
+
+## HttpStatus?
+
+Enum 클래스:
+
+- 서로 관련 있는 상수들을 모아 심볼릭한 명칭의 집합으로 정의
+- 클래스처럼 보이는 상수
