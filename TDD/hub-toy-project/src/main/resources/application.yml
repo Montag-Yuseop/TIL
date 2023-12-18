@@ -22,3 +22,11 @@ server:
   port: 8080
   servlet:
     context-path: /api/v1
+
+hub:
+  toy:
+    project:
+      short:
+        url:
+          id: ${CLIENT_ID}
+          secret: ${CLIENT_SECRET}
