@@ -1,5 +1,7 @@
 package com.test.tddtest.controller;
 
+import com.test.tddtest.common.Constants;
+import com.test.tddtest.common.exception.ProductException;
 import com.test.tddtest.dto.ProductDto;
 import com.test.tddtest.service.ProductService;
 import jakarta.validation.Valid;
@@ -59,8 +61,8 @@ public class ProductController {
     }
 
     @PostMapping("/exception")
-    public void exceptionTest() throws Exception {
-        throw new Exception();
+    public void exceptionTest() throws ProductException {
+        throw new ProductException(Constants.ExceptionClass.PRODUCT, HttpStatus.FORBIDDEN, "접근이 금지되었습니다.");
     }
 
 //    @ExceptionHandler(value = Exception.class)
