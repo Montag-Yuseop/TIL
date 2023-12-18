@@ -56,6 +56,8 @@ Exception.class는 최상위 클래스로 하위 세부 예외 처리 클래스�
 - 자식 클래스가 더 높은 우선순위를 가진다
 - 컨트롤러 예외처리가 우선순위를 가진다(ControllerAdvice vs Controller)
 
+# Custom Exception
+
 ## Exception의 구조
 
 ![Exception 구조](img/Exception.png)
@@ -70,3 +72,14 @@ Enum 클래스:
 
 - 서로 관련 있는 상수들을 모아 심볼릭한 명칭의 집합으로 정의
 - 클래스처럼 보이는 상수
+
+```java
+BAD_REQUEST(400, Series.CLIENT_ERROR, "Bad Request")
+(value, series, resonPhrase)
+```
+
+## Custom Exception
+
+- error type: httpStatus의 reasonPhrase
+- error code: HttpStatus value
+- message: 상황별 디테일한 Message
