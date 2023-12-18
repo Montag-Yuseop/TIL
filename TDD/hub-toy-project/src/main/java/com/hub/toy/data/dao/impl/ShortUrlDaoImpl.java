@@ -20,18 +20,19 @@ public class ShortUrlDaoImpl implements ShortUrlDao {
     @Override
     public ShortUrlEntity saveShortUrl(ShortUrlEntity shortUrl) {
         log.info("SAVE");
-        ShortUrlEntity foundShortUrl = shortUrlRepository.save(shortUrl);
-        return foundShortUrl;
+        ShortUrlEntity foundShortUrlEntity = shortUrlRepository.save(shortUrl);
+        return foundShortUrlEntity;
     }
 
     @Override
     public ShortUrlEntity getShortUrl(String originalUrl) {
-        ShortUrlEntity foundShortUrl = shortUrlRepository.findByOrgUrl(originalUrl);
-        return foundShortUrl;
+        ShortUrlEntity foundShortUrlEntity = shortUrlRepository.findByOrgUrl(originalUrl);
+        return foundShortUrlEntity;
     }
     @Override
     public ShortUrlEntity getOriginalUrl(String shortUrl) {
-        return null;
+        ShortUrlEntity foundShortUrlEntity = shortUrlRepository.findByUrl(shortUrl);
+        return foundShortUrlEntity;
     }
 
     @Override
@@ -41,11 +42,13 @@ public class ShortUrlDaoImpl implements ShortUrlDao {
 
     @Override
     public void deleteByShortUrl(String shortUrl) {
-
+        ShortUrlEntity foundShortUrlEntity = shortUrlRepository.findByUrl(shortUrl);
+        shortUrlRepository.delete(foundShortUrlEntity);
     }
 
     @Override
     public void deleteByOriginalUrl(String originalUrl) {
-
+        ShortUrlEntity foundShortUrlEntity = shortUrlRepository.findByOrgUrl(originalUrl);
+        shortUrlRepository.delete(foundShortUrlEntity);
     }
 }

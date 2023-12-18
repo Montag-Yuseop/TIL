@@ -76,14 +76,28 @@ public class ShortUrlServiceImpl implements ShortUrlService {
         return null;
     }
 
+    /*
+    Url 삭제 메서드, url 내의 구조를 검증하여 short인지 original인지 판단하여 삭제
+     */
     @Override
-    public ShortUrlResponseDto deleteByShortUrl(String shortUrl) {
-        return null;
+    public void deleteShortUrl(String url) {
+        if(url.contains("me2.do")) {
+            log.info("[deleteShortUrl] Request is 'ShortUrl'. ");
+            deleteByShortUrl(url);
+        } else {
+            log.info("[deleteShortUrl] Request is 'OriginalUrl'. ");
+            deleteByOriginalUrl(url);
+        }
     }
 
-    @Override
-    public ShortUrlResponseDto deleteByOriginalUrl(String originalUrl) {
-        return null;
+    private void deleteByShortUrl(String url) {
+        log.info("[deleteByShortUrl] delete recode");
+        shortUrlDao.deleteByShortUrl(url);
+    }
+
+    private void deleteByOriginalUrl(String url) {
+        log.info("[deleteByOriginalUrl] delete recode");
+        shortUrlDao.deleteByOriginalUrl(url);
     }
 
     private ResponseEntity<NaverUriDto> requestShortUrl(String clientId, String clientSecret,
