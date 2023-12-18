@@ -1,4 +1,4 @@
-package com.test.tddtest.dto;
+package com.test.tddtest.data.dto;
 
 import com.test.tddtest.data.entity.ProductEntity;
 import jakarta.validation.constraints.*;

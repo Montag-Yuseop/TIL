@@ -2,7 +2,7 @@ package com.test.tddtest.service.impl;
 
 import com.test.tddtest.data.entity.ProductEntity;
 import com.test.tddtest.data.handler.ProductDataHandler;
-import com.test.tddtest.dto.ProductDto;
+import com.test.tddtest.data.dto.ProductDto;
 import com.test.tddtest.service.ProductService;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
