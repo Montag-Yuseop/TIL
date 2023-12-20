@@ -1,5 +1,33 @@
 # JpaAuditing
 
+JPA Auditing은 각 엔티티 별로 누가, 언제 접근했는지 기록해 감시 체계를 꾸리는 것</br>
+ex) 언제 데이터가 생성, 누가 생성, 언제 데이터가 변경
+
+Spring Data Jpa에서 이 기능을 사용하기 위해서는 실행 파일에 @EnableJpaAuditing을 사용해야 한다
+
+## EntityListener
+
+엔티티 객체를 데이터베이스에 적용하기 전/후에 콜백을 요청하는 Annotation
+
+@EntityListener의 파라미터로 콜백을 요청할 클래스를 지정하여 사용
+
+요청 시점
+
+- @PostLoad
+- @PrePersist
+- @PostPersist
+- @PreUpdate
+- @PostUpdate
+- @PreRemove
+- @PostRemove
+
+## Jpa Auditing Annotation
+
+- @CreatedDate: 엔티티가 저장되는 시점에 자동으로 시간 주입
+- @CreatedBay: 엔티티가 저장되는 시점에 저장 주체가 누구인지 주입
+- @LastModifiedDate: 엔티티가 수정되는 시점에 자동으로 시간을 주입
+- @LastModifiedBy: 엔티티가 수정되는 시점에 수정 주체가 누구인지 주입
+
 ## 자동으로 Entity에 값을 생성할 때 사용
 
 ```java
