@@ -50,9 +50,10 @@ public class ShortUrlController {
     public ShortUrlResponseDto updateShortUrl(String originalUrl) { return null; }
 
     // ShortUrl 삭제 API
-    @DeleteMapping("")
+    @DeleteMapping("/")
     public ResponseEntity<String> deleteShortUrl(String url) {
         try {
+            log.info("url@@@={}", url);
             shortUrlService.deleteShortUrl(url);
         } catch (RuntimeException e) {
             e.printStackTrace();

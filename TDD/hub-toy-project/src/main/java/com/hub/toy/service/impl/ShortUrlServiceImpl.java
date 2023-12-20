@@ -10,6 +10,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.*;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 
@@ -17,6 +18,7 @@ import java.net.URI;
 import java.util.Arrays;
 
 @RequiredArgsConstructor
+@Transactional(readOnly = true)
 @Service
 public class ShortUrlServiceImpl implements ShortUrlService {
 
@@ -80,6 +82,7 @@ public class ShortUrlServiceImpl implements ShortUrlService {
     Url 삭제 메서드, url 내의 구조를 검증하여 short인지 original인지 판단하여 삭제
      */
     @Override
+    @Transactional
     public void deleteShortUrl(String url) {
         if(url.contains("me2.do")) {
             log.info("[deleteShortUrl] Request is 'ShortUrl'. ");
