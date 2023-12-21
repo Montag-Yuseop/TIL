@@ -5,6 +5,8 @@ ex) 언제 데이터가 생성, 누가 생성, 언제 데이터가 변경
 
 Spring Data Jpa에서 이 기능을 사용하기 위해서는 실행 파일에 @EnableJpaAuditing을 사용해야 한다
 
+Configuration을 생성해서 사용하자(나중에 테스트를 위해서)
+
 ## EntityListener
 
 엔티티 객체를 데이터베이스에 적용하기 전/후에 콜백을 요청하는 Annotation
