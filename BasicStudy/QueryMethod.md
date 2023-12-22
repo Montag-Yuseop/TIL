@@ -67,3 +67,37 @@ find...by 또는 exists...by 등</br>
   Containing 키워드는 양 끝에 % ('%값%')</br>
   StartingWith는 앞에 % ('%값')</br>
   EndingWith는 뒤에 %('값%')
+
+# 정렬과 페이징
+
+## 정렬
+
+### 쿼리문에서 정렬
+
+ORDER BY 구문을 사용하여 오름차순 / 내림차순의 데이터를 받는다
+
+메서드 이름으로 정렬 처리(Asc, Desc)</br>
+ex) findByNameOrderByStockAsc</br>
+여러개 ex) findByNameOrderByStockAscPriceDesc(1순위, 2순위 정렬)
+
+### Sort를 활용한 정렬
+
+Sort 객체를 활용하여 정렬
+
+ex) findByName(String name, Sort sort)</br>
+findByName("pen", Sort.by(Order.asc("price")));
+
+## 페이징
+
+데이터베이스의 레코드를 개수로 나눠서 페이지를 구분
+
+리턴 타입으로 Page를 설정하고, 매개변수로 Pageable 사용
+
+ex) findByName(String name, Pageable pageable); </br>
+findByName("공책", PageRequest.of(0,2));
+
+| of 메서드                                                | 매개변수 설명                                            | 비고                                       |
+| -------------------------------------------------------- | -------------------------------------------------------- | ------------------------------------------ |
+| of(int page, int size)                                   | 페이지 번호(zero-based), 페이지 당 데이터 개수           | 정렬x                                      |
+| of(int page, int size, Sort)                             | 페이지 번호, 페이지 당 데이터 개수, 정렬                 | sort에 의한 정렬                           |
+| of(int page, int size, Direction, String ... properties) | 페이지 번호, 페이지 당 데이터 개수, enum 정렬 방향, 컬럼 | Sort.by(direction, properties)에 의해 정렬 |
