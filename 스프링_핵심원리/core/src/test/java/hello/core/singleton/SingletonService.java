@@ -1,5 +1,8 @@
 package hello.core.singleton;
 
+import org.springframework.stereotype.Component;
+
+//@Component
 public class SingletonService {
     private static final SingletonService instance = new SingletonService();
 
