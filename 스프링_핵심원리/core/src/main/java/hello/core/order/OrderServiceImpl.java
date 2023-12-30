@@ -17,8 +17,6 @@ public class OrderServiceImpl implements OrderService{
 //    @Autowired
     private final DiscountPolicy discountPolicy;
 
-
-
 //    @Autowired
 //    public void setMemberRepository(MemberRepository memberRepository) {
 //        System.out.println("memberRepository = " + memberRepository);
@@ -34,14 +32,26 @@ public class OrderServiceImpl implements OrderService{
     // 생성자 주입
     // 생성자 호출 시점에 딱 1번만 호출되는 것이 보장
     // 불변, 필수 의존관계에 주로 사용된다
-    @Autowired
+//    @Autowired
     public OrderServiceImpl(MemberRepository memberRepository, DiscountPolicy discountPolicy) {
-//        System.out.println("memberRepository = " + memberRepository);
-//        System.out.println("discountPolicy = " + discountPolicy);
+        System.out.println("memberRepository = " + memberRepository);
+        System.out.println("discountPolicy = " + discountPolicy);
         System.out.println("OrderServiceImpl.OrderServiceImpl");
         this.memberRepository = memberRepository;
         this.discountPolicy = discountPolicy;
     }
+
+
+//    @Autowired
+//    public void setMemberRepository(MemberRepository memberRepository) {
+//        this.memberRepository = memberRepository;
+//    }
+
+//    @Autowired
+//    public void init(MemberRepository memberRepository, DiscountPolicy discountPolicy) {
+//        this.memberRepository = memberRepository;
+//        this.discountPolicy = discountPolicy;
+//    }
 
     @Override
     public Order createOrder(Long memberId, String itemName, int itemPrice) {
