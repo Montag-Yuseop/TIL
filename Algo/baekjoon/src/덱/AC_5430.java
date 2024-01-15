@@ -52,7 +52,7 @@ public class AC_5430 {
             if(isOk) {
                 sb.append("[");
                 if(dq.isEmpty()){
-                    sb.append("]");
+                    sb.append("]\n");
                     continue;
                 }
 
