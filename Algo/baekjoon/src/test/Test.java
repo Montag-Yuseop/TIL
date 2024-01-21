@@ -3,14 +3,28 @@ package test;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.Arrays;
+import java.util.PriorityQueue;
+import java.util.StringTokenizer;
 
 public class Test {
 
     public static void main(String[] args) throws IOException {
 
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringTokenizer st = new StringTokenizer(br.readLine());
 
-        System.out.println(Integer.parseInt(br.readLine(), 16));
+        PriorityQueue<Integer> pq = new PriorityQueue<>();
+
+        for (int i = 0; i < 3; i++) {
+            int x = Integer.parseInt(st.nextToken());
+            pq.offer(x);
+        }
+
+        for (int i = 0; i < 3; i++) {
+            int x = pq.poll();
+            System.out.print(x +" ");
+        }
 
     }
 
