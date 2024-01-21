@@ -18,15 +18,16 @@ public class JpaMain {
         tx.begin();
 
         try {
-//            Member findMember = em.find(Member.class, 1L);
-            List<Member> result = em.createQuery("select m from Member m", Member.class)
-                    .setFirstResult(5)
-                    .setMaxResults(8)
-                    .getResultList();
+            // 영속
+            Member member = new Member(200L, "member200");
 
-            System.out.println(result.toString());
-            
-            tx.commit();
+            em.persist(member);
+
+            System.out.println("======= 플러시 실행 ========");
+            em.flush();
+            System.out.println("==========================");
+
+            tx.commit(); // persist에서 쌓고 있다가 commit때 보낸다
         } catch (Exception e) {
             tx.rollback();
         } finally {
