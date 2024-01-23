@@ -18,16 +18,7 @@ public class JpaMain {
         tx.begin();
 
         try {
-            // 영속
-//            Member member = new Member(200L, "member200");
-//
-//            em.persist(member);
-//
-//            System.out.println("======= 플러시 실행 ========");
-//            em.flush();
-//            System.out.println("==========================");
-//
-//            tx.commit(); // persist에서 쌓고 있다가 commit때 보낸다
+            tx.commit(); // persist에서 쌓고 있다가 commit때 보낸다
         } catch (Exception e) {
             tx.rollback();
         } finally {
