@@ -3,27 +3,28 @@ package test;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.Arrays;
-import java.util.PriorityQueue;
-import java.util.StringTokenizer;
 
 public class Test {
 
     public static void main(String[] args) throws IOException {
 
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        StringTokenizer st = new StringTokenizer(br.readLine());
+        int answer = 0;
+        int odd = Integer.MAX_VALUE;
 
-        PriorityQueue<Integer> pq = new PriorityQueue<>();
+        for(int i = 0; i < 7; i++) {
+            int N = Integer.parseInt(br.readLine());
 
-        for (int i = 0; i < 3; i++) {
-            int x = Integer.parseInt(st.nextToken());
-            pq.offer(x);
+            if(N % 2 != 0) {
+                answer += N;
+                odd = Math.min(odd, N);
+            }
         }
 
-        for (int i = 0; i < 3; i++) {
-            int x = pq.poll();
-            System.out.print(x +" ");
+        if(odd == Integer.MAX_VALUE) System.out.println(-1);
+        else {
+            System.out.println(answer);
+            System.out.println(odd);
         }
 
     }
