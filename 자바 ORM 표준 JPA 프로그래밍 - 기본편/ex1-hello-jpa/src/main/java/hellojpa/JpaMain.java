@@ -18,24 +18,20 @@ public class JpaMain {
         tx.begin();
 
         try {
-            Member member1 = new Member();
-            member1.setUsername("A");
 
-            Member member2 = new Member();
-            member2.setUsername("B");
+            Team team = new Team();
+            team.setName("TeamA");
+            em.persist(team);
 
-            Member member3 = new Member();
-            member3.setUsername("C");
-            System.out.println("===============");
+            Member member = new Member();
+            member.setUsername("Member1");
+            member.setTeam(team);
+            em.persist(member);
 
-            em.persist(member1);
-            em.persist(member2);
-            em.persist(member3);
+            Member findMember = em.find(Member.class, member.getId());
+            Team findTeam = findMember.getTeam();
 
-            System.out.println(member1.getId());
-            System.out.println(member2.getId());
-            System.out.println(member3.getId());
-            System.out.println("===============");
+            System.out.println("findTeam = " + findTeam.getName());
 
 
             tx.commit(); // persist에서 쌓고 있다가 commit때 보낸다
