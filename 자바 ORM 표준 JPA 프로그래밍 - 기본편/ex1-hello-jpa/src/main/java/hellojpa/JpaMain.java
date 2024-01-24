@@ -18,9 +18,18 @@ public class JpaMain {
         tx.begin();
 
         try {
+            Member member = new Member();
+            member.setUsername("C");
+            System.out.println("===============");
+            System.out.println(member.getId());
+            em.persist(member);
+            System.out.println(member.getId());
+            System.out.println("===============");
+
+
             tx.commit(); // persist에서 쌓고 있다가 commit때 보낸다
         } catch (Exception e) {
-            tx.rollback();
+            e.printStackTrace();
         } finally {
             em.close();
         }
