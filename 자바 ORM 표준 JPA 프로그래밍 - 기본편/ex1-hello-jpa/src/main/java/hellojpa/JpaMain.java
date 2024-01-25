@@ -19,24 +19,29 @@ public class JpaMain {
 
         try {
 
+            // 저장
             Team team = new Team();
             team.setName("TeamA");
             em.persist(team);
 
             Member member = new Member();
             member.setUsername("Member1");
-            member.setTeam(team);
+//            member.changeTeam(team);
             em.persist(member);
 
-            em.flush();
-            em.clear();
+//            em.flush();
+//            em.clear();
 
-            Member findMember = em.find(Member.class, member.getId());
-            List<Member> members = findMember.getTeam().getMembers();
+            Team findTeam = em.find(Team.class, team.getId());
+            List<Member> members = findTeam.getMembers();
 
+            team.addMember(member);
+
+            System.out.println("============");
             for (Member m : members) {
                 System.out.println("m.getUsername() = " + m.getUsername());
             }
+            System.out.println("============");
 
             tx.commit(); // persist에서 쌓고 있다가 commit때 보낸다
         } catch (Exception e) {
