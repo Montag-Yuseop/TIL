@@ -3,36 +3,55 @@ package test;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.Arrays;
 import java.util.StringTokenizer;
 
 public class Test {
+
+    static int[] card;
 
     public static void main(String[] args) throws IOException {
 
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         StringBuilder sb = new StringBuilder();
 
-        int answer = 0;
+        card = new int[21];
 
-        StringTokenizer st = new StringTokenizer(br.readLine());
+        for (int i = 1; i <= 20; i++) {
+            card[i] = i;
+        }
 
-        long a = Long.parseLong(st.nextToken());
-        long b = Long.parseLong(st.nextToken());
+        for(int i = 0; i < 10; i++) {
+            // 두 숫자 입력
+            StringTokenizer st = new StringTokenizer(br.readLine());
+            int a = Integer.parseInt(st.nextToken());
+            int b = Integer.parseInt(st.nextToken());
 
-        long start = Math.min(a, b);
-        long end = Math.max(a, b);
+            // 카드를 뒤집는 로직
+            reverse(a, b);
+        }
 
-        if(start == end) sb.append(0);
-        else {
-            sb.append(end - start - 1).append("\n");
+        br.close();
 
-            for(long i = start + 1; i < end; i++) {
-                sb.append(i + " ");
-            }
+        // 출력
+        for(int i = 1; i <= 20; i++) {
+            sb.append(card[i]+" ");
         }
 
         System.out.println(sb);
 
+    }
+
+    public static void reverse(int a, int b) {
+        // 얕은 복사와 깊은 복사
+        // 그냥 할당하면 얕은 복사 - int[] copy = card; = 주소값 공유로 인해 값이 바뀌면 같이 바뀜
+        // clone을 통한 깊은 복사 - 값만 공유하기 때문에 서로 개별적인 메모리에 담긴다
+        int[] copy = card.clone();
+
+        // 5, 10이면 5 - 10, 6 - 9 ...
+        for(int i = a; i <= b; i++) {
+            card[i] = copy[b-i+a];
+        }
 
     }
 
