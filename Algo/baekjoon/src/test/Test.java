@@ -7,52 +7,36 @@ import java.util.Arrays;
 import java.util.StringTokenizer;
 
 public class Test {
-
-    static int[] card;
-
     public static void main(String[] args) throws IOException {
 
+        // a케이크b = a.z + b.x, a.y * b.y, a.x + b.z;
+        // a.z + b.x = c.x;
+        // a.y * b.y = c.y;
+        // a.x + b.z = c.z;
+
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        StringBuilder sb = new StringBuilder();
 
-        card = new int[21];
+        StringTokenizer st = new StringTokenizer(br.readLine());
 
-        for (int i = 1; i <= 20; i++) {
-            card[i] = i;
-        }
+        int ax = Integer.parseInt(st.nextToken());
+        int ay = Integer.parseInt(st.nextToken());
+        int az = Integer.parseInt(st.nextToken());
 
-        for(int i = 0; i < 10; i++) {
-            // 두 숫자 입력
-            StringTokenizer st = new StringTokenizer(br.readLine());
-            int a = Integer.parseInt(st.nextToken());
-            int b = Integer.parseInt(st.nextToken());
+        st = new StringTokenizer(br.readLine());
+        int cx = Integer.parseInt(st.nextToken());
+        int cy = Integer.parseInt(st.nextToken());
+        int cz = Integer.parseInt(st.nextToken());
 
-            // 카드를 뒤집는 로직
-            reverse(a, b);
-        }
+        int bx = cx - az;
+        int by = cy / ay;
+        int bz = cz - ax;
 
-        br.close();
+        System.out.println(bx +" " + by +" "+ bz);
 
-        // 출력
-        for(int i = 1; i <= 20; i++) {
-            sb.append(card[i]+" ");
-        }
 
-        System.out.println(sb);
 
     }
 
-    public static void reverse(int a, int b) {
-        // 얕은 복사와 깊은 복사
-        // 그냥 할당하면 얕은 복사 - int[] copy = card; = 주소값 공유로 인해 값이 바뀌면 같이 바뀜
-        // clone을 통한 깊은 복사 - 값만 공유하기 때문에 서로 개별적인 메모리에 담긴다
-        int[] copy = card.clone();
 
-        // 5, 10이면 5 - 10, 6 - 9 ...
-        for(int i = a; i <= b; i++) {
-            card[i] = copy[b-i+a];
-        }
-
-    }
 
 }
