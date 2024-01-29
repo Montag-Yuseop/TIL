@@ -17,19 +17,7 @@ public class JpaMain {
 
         try {
 
-            Movie movie = new Movie();
-            movie.setActor("Aaaa");
-            movie.setDirector("Bbbb");
-            movie.setName("Cccc");
-            movie.setPrice(10000);
-
-            em.persist(movie);
-
-            em.flush();
-            em.clear();
-
-            Movie findMovie = em.find(Movie.class, movie.getId());
-            System.out.println("findMovie = " + findMovie.getName());
+           
 
             tx.commit(); // persist에서 쌓고 있다가 commit때 보낸다
         } catch (Exception e) {
