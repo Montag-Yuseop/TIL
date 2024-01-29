@@ -17,7 +17,20 @@ public class JpaMain {
 
         try {
 
-           
+            Member member = new Member();
+            member.setUsername("hello");
+
+            em.persist(member);
+
+            em.flush();
+            em.clear();
+
+            //
+//            Member findMember = em.find(Member.class, member.getId());
+            Member findMember = em.getReference(Member.class, member.getId());
+            System.out.println("findMember.getClass() = " + findMember.getClass());
+            System.out.println("findMember.getId() = " + findMember.getId());
+            System.out.println("findMember.getUsername() = " + findMember.getUsername());
 
             tx.commit(); // persist에서 쌓고 있다가 commit때 보낸다
         } catch (Exception e) {
