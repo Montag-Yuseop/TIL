@@ -16,21 +16,16 @@ public class JpaMain {
         tx.begin();
 
         try {
+            Child child1 = new Child();
+            Child child2 = new Child();
 
-            Member member = new Member();
-            member.setUsername("hello");
+            Parent parent = new Parent();
+            parent.addChild(child1);
+            parent.addChild(child2);
 
-            em.persist(member);
-
-            em.flush();
-            em.clear();
-
-            //
-//            Member findMember = em.find(Member.class, member.getId());
-            Member findMember = em.getReference(Member.class, member.getId());
-            System.out.println("findMember.getClass() = " + findMember.getClass());
-            System.out.println("findMember.getId() = " + findMember.getId());
-            System.out.println("findMember.getUsername() = " + findMember.getUsername());
+            em.persist(child1);
+            em.persist(child2);
+            em.persist(parent);
 
             tx.commit(); // persist에서 쌓고 있다가 commit때 보낸다
         } catch (Exception e) {
