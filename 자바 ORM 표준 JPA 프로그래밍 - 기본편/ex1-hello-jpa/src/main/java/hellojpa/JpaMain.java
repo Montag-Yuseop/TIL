@@ -23,8 +23,6 @@ public class JpaMain {
             parent.addChild(child1);
             parent.addChild(child2);
 
-            em.persist(child1);
-            em.persist(child2);
             em.persist(parent);
 
             tx.commit(); // persist에서 쌓고 있다가 commit때 보낸다
