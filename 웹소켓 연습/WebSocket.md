@@ -345,3 +345,7 @@ export const send = (message) => {
 ```
 
 주석으로 처리된 부분이 작동하고 있었는데, 객체를 다시 객체 안에 담아서 보내니까 파싱을 못하는 오류가 생긴 것
+
+stomp 헤더 추가 방법
+
+https://ppaksang.tistory.com/18
