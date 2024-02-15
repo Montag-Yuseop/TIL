@@ -64,3 +64,18 @@ cat /var/jenkins_home/secrets/initialAdminPassword
 
 # nginx 설치
 
+```bash
+sudo apt update
+
+# nginx 설치
+sudo apt install nginx
+
+# 상태 확인
+sudo service nginx status
+
+# nginx 시작
+sudo service nginx start
+
+# nginx 종료
+sudo service nginx stop
+```
