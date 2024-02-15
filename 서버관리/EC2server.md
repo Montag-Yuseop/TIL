@@ -62,7 +62,5 @@ cat /var/jenkins_home/secrets/initialAdminPassword
 
 왼쪽 추천 플러그인 설치로 진행
 
-
-
 # nginx 설치
 
