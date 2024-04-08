@@ -1,4 +1,4 @@
-# SQL 연습장(프로그래머스)
+# SQL 연습장(프로그래머스 문제)
 
 ## Level 1
 
@@ -248,4 +248,108 @@ WHERE
 ORDER BY
     HISTORY_ID DESC
 ;
+```
+
+## Level 2
+
+### 이름에 el이 들어가는 동물 찾기
+
+#### 이해
+
+`WHERE`문에 `LIKE`문을 활용하면 쉽게 찾을 수 있을 것 같았다
+
+문제는 대소문자 구별을 안한다는 것
+
+어떤 함수가 있을까 살펴봤다
+
+`UPPER` 또는 `LOWER`를 사용해서 `NAME` 컬럼을 모두 소문자로 바꾼 뒤 일치하는지 검색하면 된다
+
+추가로 기르던 개라는 조건도 넣어줘야 했다
+
+#### 코드
+
+```sql
+SELECT
+    ANIMAL_ID, NAME
+FROM
+    ANIMAL_INS
+WHERE
+    ANIMAL_TYPE = 'Dog' AND
+    LOWER(NAME) LIKE '%el%'
+ORDER BY
+    NAME
+;
+```
+
+### DATETIME에서 DATE로 형 변환
+
+#### 이해
+
+DATE_FORMAT을 사용하면 되는 문제였다
+
+DATE_FORMAT은 자주 쓰기 때문에 알아두자
+
+#### 코드
+
+```sql
+SELECT
+    ANIMAL_ID,
+    NAME,
+    DATE_FORMAT(DATETIME, "%Y-%m-%d") AS "날짜"
+FROM
+    ANIMAL_INS
+;
+```
+
+### 카테고리 별 상품 개수 구하기
+
+#### 이해
+
+SQL 내의 문자열을 쪼개서 그룹화 할 줄 알아야 하는 문제였다
+
+`PRODUCT_CODE` 앞 두 자리를 `CATEGORY`로 만든 뒤 해당 `CATEGORY`로 `GROUP BY` 해줘야 했다
+
+문자열을 쪼개는 것은 기본적으로 `SUBSTR`(오라클) 또는 `SUBSTRING`(MySQL)으로 사용한다
+
+`SUBSTRING(문자, 시작, 종료)`로 사용하면 되는 듯 하다
+
+`LEFT`, `RIGHT`, `MID`도 있다
+
+`LEFT(문자, 종료)`는 말 그대로 왼쪽부터 가져오는 것이고</br>
+`RIGHT(문자, 종료)`는 오른쪽 부터 가져오는 것이다
+
+`MID`는 SUBSTRING과 똑같이 쓰면 되겠다
+
+```sql
+SELECT
+    SUBSTR(PRODUCT_CODE, 1, 2) AS CATEGORY,
+    COUNT(PRODUCT_ID) AS PRODUCTS
+FROM
+    PRODUCT
+GROUP BY
+    CATEGORY
+;
+```
+
+### 중성화 여부 파악하기
+
+#### 이해
+저번에 했던 것과 비슷하게 `IF` 또는 `WHEN`으로 조건을 입력해서 O, X로 나타내면 됐다
+
+#### 코드
+
+```sql
+SELECT
+    ANIMAL_ID,
+    NAME,
+    CASE
+        WHEN SEX_UPON_INTAKE LIKE '%Neutered%' THEN 'O'
+        WHEN SEX_UPON_INTAKE LIKE '%Spayed%' THEN 'O'
+        ELSE 'X'
+    END AS '중성화'
+FROM
+    ANIMAL_INS
+ORDER BY
+    ANIMAL_ID ASC
+;    
 ```
