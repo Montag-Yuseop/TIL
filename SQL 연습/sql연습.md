@@ -353,3 +353,152 @@ ORDER BY
     ANIMAL_ID ASC
 ;    
 ```
+
+### 있었는데요 없었습니다
+
+#### 이해
+
+보호 시작일보다 입양일이 더 빠른 동물의 아이디와 이름을 조회해야 한다
+
+정렬은 보호 시작일이 빠른 순이다
+
+`DATEDIFF`를 사용하면 될 듯 했다
+
+테이블이 두 개라 `JOIN`을 진행해야 했다
+
+보호 시작일은 `ANIMAL_INS` 테이블의 `DATETIME`이며, 입양일은 `ANIMAL_OUTS` 테이블의 `DATETIME`이다
+
+그런데 `DATEDIFF(i.DATETIME, o.DATETIME)`을 비교했는데 오답이 나왔다
+
+`i.DATETIME > o.DATETIME` 으로 수정해서 진행했다
+
+이유를 살펴보았더니, `DATEDIFF()`는 날짜의 차이만 계산하기 때문에 같은 날짜지만 시간이 늦은 경우를 체크하지 못했다
+
+따라서 만일 `DIFF`를 쓰고싶다면? `TIMEDIFF(o.DATETIME, i.DATETIME) < 0`으로 진행해야 했다
+
+#### 코드
+
+```sql
+SELECT
+    i.ANIMAL_ID AS ANIMAL_ID,
+    i.NAME AS NAME
+FROM
+    ANIMAL_INS AS i
+JOIN
+    ANIMAL_OUTS AS o
+ON
+    i.ANIMAL_ID = o.ANIMAL_ID
+WHERE
+    i.DATETIME > o.DATETIME
+ORDER BY
+    i.DATETIME
+;
+
+-- 또는
+
+SELECT
+    i.ANIMAL_ID AS ANIMAL_ID,
+    i.NAME AS NAME
+FROM
+    ANIMAL_INS AS i
+        JOIN
+    ANIMAL_OUTS AS o
+    ON
+        i.ANIMAL_ID = o.ANIMAL_ID
+WHERE
+    TIMEDIFF(o.DATETIME, i.DATETIME) < 0
+ORDER BY
+    i.DATETIME
+;
+```
+
+### 오랜 기간 보호한 동물(1)
+
+#### 이해
+
+입양을 가지 못한 동물 중 가장 오래 보호소에 있었던 동물 3마리 이름과 보호 시작일을 조회하는 Query를 작성해야 하며, 정렬은 보호 시작일 순으로 조회해야 한다
+
+입양을 가지 못한 동물을 알기 위해서는 `LEFT JOIN`을 진행한 뒤 NULL 값인 경우를 찾아야 할 듯 하다. 여기서 `IS NULL` 조건은 입양 시작일인 `o.DATETIME`을 걸어줬다
+
+또한 3마리까지만 조회해야 하므로, `LIMIT 3`으로 3마리 조회를 넣어주면 되겠다
+
+#### 코드
+
+```sql
+
+SELECT
+    i.NAME,
+    i.DATETIME
+FROM
+    ANIMAL_INS AS i
+LEFT JOIN
+    ANIMAL_OUTS AS o
+ON
+    i.ANIMAL_ID = o.ANIMAL_ID
+WHERE
+    o.DATETIME IS NULL
+ORDER BY
+    i.DATETIME
+LIMIT
+    3
+;
+```
+
+### 조건별로 분류하여 주문상태 출력하기
+
+#### 이해
+
+5월 1일을 기준으로 주문 ID, 제품  ID, 출고일자, 출고 여부를 조회해야 한다
+
+정리하면, 5월 1일 기준으로 출고되었으면 출고 완료, 이후면 출고 대기, `NULL`이면 출고미정인 것
+
+`CASE WHEN THEN`을 쓰면 될 듯하다
+
+`WHEN DATEDIFF(OUT_DATE, "2022-05-01") <= 0 THEN "출고완료"` 방식을 활용해 `DATEDIFF`로 구할 수도 있다
+
+#### 코드
+```sql
+SELECT
+    ORDER_ID,
+    PRODUCT_ID,
+    DATE_FORMAT(OUT_DATE, "%Y-%m-%d") AS OUT_DATE,
+    CASE
+    WHEN OUT_DATE <= "2022-05-01" THEN "출고완료"
+    -- WHEN DATEDIFF(OUT_DATE, "2022-05-01") <= 0 THEN "출고완료"
+    WHEN OUT_DATE IS NULL THEN "출고미정"
+    ELSE "출고대기"
+    END AS 출고여부
+FROM
+    FOOD_ORDER
+ORDER BY
+    ORDER_ID
+;
+```
+
+### 오랜 기간 보호한 동물(1)
+
+#### 이해
+
+`ORDER BY` 구문도 뺄셈이 가능하기 때문에 입양일에서 보호 시작일을 빼준 값을 내림차순 정렬하여 `LIMIT 2`로 2 개만 뽑아오면 됐다
+
+입양이 안된 것은 이전 처럼 `LEFT JOIN`을 진행한 뒤 `IS NOT NULL` 구문을 활용했다
+
+#### 코드
+```sql
+SELECT
+    i.ANIMAL_ID,
+    i.NAME
+FROM
+    ANIMAL_INS AS i
+LEFT JOIN
+    ANIMAL_OUTS AS o
+ON
+    i.ANIMAL_ID = o.ANIMAL_ID
+WHERE
+    o.DATETIME IS NOT NULL
+ORDER BY
+    o.DATETIME - i.DATETIME DESC
+LIMIT
+    2
+;
+```
