@@ -502,3 +502,23 @@ LIMIT
     2
 ;
 ```
+### 루시와 엘라 찾기
+
+#### 이해
+
+ 조건문으로 일치하는 이름만 찾으면 되는 문제였다
+ 
+`IN`을 사용해서 필요한 조건들을 모두 나열했다
+
+#### 코드
+```sql
+SELECT
+    ANIMAL_ID,
+    NAME,
+    SEX_UPON_INTAKE
+FROM
+    ANIMAL_INS
+WHERE
+    NAME IN ('Lucy', 'Ella', 'Pickle', 'Rogan', 'Sabrina','Mitty')
+;
+```
