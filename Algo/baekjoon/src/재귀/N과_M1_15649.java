@@ -3,61 +3,47 @@ package 재귀;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.ArrayList;
 import java.util.StringTokenizer;
 
 public class N과_M1_15649 {
 
-    static int[] arr;
+    static StringBuilder sb = new StringBuilder();
     static boolean[] visited;
-    static ArrayList<ArrayList<Integer>> adj;
+    static int[] arr;
 
     public static void main(String[] args) throws IOException {
 
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringTokenizer st = new StringTokenizer(br.readLine());
+        int N = Integer.parseInt(st.nextToken());
+        int M = Integer.parseInt(st.nextToken());
 
-        int N = Integer.parseInt(br.readLine());
+        visited = new boolean[N + 1];
+        arr = new int[M];
 
-        adj = new ArrayList<>();
+        dfs(0, M, N);
 
-        for(int i = 0; i <= N; i++) {
-            adj.add(new ArrayList<>());
-        }
-
-        StringTokenizer st;
-
-        arr = new int[N+1];
-        visited = new boolean[N+1];
-
-        for(int i = 0 ; i < N - 1; i++) {
-            st = new StringTokenizer(br.readLine());
-            int a = Integer.parseInt(st.nextToken());
-            int b = Integer.parseInt(st.nextToken());
-
-            adj.get(a).add(b);
-            adj.get(b).add(a);
-        }
-
-        dfs(1);
-
-        for(int i = 2; i < arr.length; i++) {
-            System.out.println(arr[i]);
-        }
-
+        System.out.println(sb);
     }
 
-    static void dfs(int v) {
-        visited[v] = true; // 방문 처리
+    static void dfs(int depth, int M, int N) {
+        if(depth == M) {
+            for(int i : arr) {
+                sb.append(i).append(" ");
+            }
+            sb.append("\n");
+            return;
+        }
 
-        for(int i : adj.get(v)) {
+        for(int i = 1; i <= N; i++) {
             if(!visited[i]) {
-                arr[i] = v;
-                dfs(i);
+                visited[i] = true;
+                arr[depth] = i;
+                dfs(depth + 1, M, N);
+                visited[i] = false;
             }
 
         }
-
-
 
     }
 }

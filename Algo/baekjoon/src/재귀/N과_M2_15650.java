@@ -1,49 +1,48 @@
-package 트리;
+package 재귀;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.StringTokenizer;
 
-public class 트리_순회_1991 {
+public class N과_M2_15650 {
 
-    static StringBuilder sb = new StringBuilder();
     static boolean[] visited;
     static int[] arr;
+    static StringBuilder sb = new StringBuilder();
 
     public static void main(String[] args) throws IOException {
 
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         StringTokenizer st = new StringTokenizer(br.readLine());
+
         int N = Integer.parseInt(st.nextToken());
         int M = Integer.parseInt(st.nextToken());
-
         visited = new boolean[N + 1];
         arr = new int[M];
 
-        dfs(0, M, N);
+        dfs( 0, N, M);
 
         System.out.println(sb);
     }
 
-    static void dfs(int depth, int M, int N) {
+    static void dfs(int depth, int N, int M) {
         if(depth == M) {
             for(int i : arr) {
                 sb.append(i).append(" ");
             }
             sb.append("\n");
-            return;
         }
 
         for(int i = 1; i <= N; i++) {
             if(!visited[i]) {
                 visited[i] = true;
                 arr[depth] = i;
-                dfs(depth + 1, M, N);
+                dfs(depth + 1, N, M);
                 visited[i] = false;
             }
-
         }
 
     }
+
 }
