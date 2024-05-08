@@ -1,4 +1,4 @@
-package 트리;
+package 재귀;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -6,7 +6,7 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.StringTokenizer;
 
-public class 트리의_부모_찾기_11725 {
+public class N과_M1_15649 {
 
     static int[] arr;
     static boolean[] visited;
