@@ -3,13 +3,13 @@ package 재귀;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.StringTokenizer;
+import java.util.*;
 
-public class N과_M2_15650 {
+public class N과_M9_15663 {
 
     static boolean[] visited;
-    static int[] arr;
-    static StringBuilder sb = new StringBuilder();
+    static int[] arr, map;
+    static LinkedHashSet<String> set = new LinkedHashSet<>();
 
     public static void main(String[] args) throws IOException {
 
@@ -20,28 +20,42 @@ public class N과_M2_15650 {
         int M = Integer.parseInt(st.nextToken());
         visited = new boolean[N + 1];
         arr = new int[M];
+        map = new int[N];
 
-        dfs( 1,0, N, M);
+        st = new StringTokenizer(br.readLine());
+        for(int i = 0; i < N; i++) {
+            map[i] = Integer.parseInt(st.nextToken());
+        }
 
-        System.out.println(sb);
+        Arrays.sort(map);
+
+        dfs(0, 0, N, M);
+
+        for(String s : set) {
+            System.out.println(s);
+        }
+
     }
 
     static void dfs(int num, int depth, int N, int M) {
         if(depth == M) {
+
+            StringBuilder sb = new StringBuilder();
             for(int i : arr) {
                 sb.append(i).append(" ");
             }
-            sb.append("\n");
+            set.add(sb.toString());
             return;
         }
 
-        for(int i = num; i <= N; i++) {
+        for(int i = 0; i < N; i++) {
             if(!visited[i]) {
                 visited[i] = true;
-                arr[depth] = i;
-                dfs(i,depth + 1, N, M);
+                arr[depth] = map[i];
+                dfs(i, depth + 1, N, M);
                 visited[i] = false;
             }
+
         }
 
     }

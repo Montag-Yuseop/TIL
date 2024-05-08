@@ -5,7 +5,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.StringTokenizer;
 
-public class N과_M2_15650 {
+public class N과_M3_15651 {
 
     static boolean[] visited;
     static int[] arr;
@@ -21,12 +21,12 @@ public class N과_M2_15650 {
         visited = new boolean[N + 1];
         arr = new int[M];
 
-        dfs( 1,0, N, M);
+        dfs( 0, N, M);
 
         System.out.println(sb);
     }
 
-    static void dfs(int num, int depth, int N, int M) {
+    static void dfs(int depth, int N, int M) {
         if(depth == M) {
             for(int i : arr) {
                 sb.append(i).append(" ");
@@ -35,13 +35,9 @@ public class N과_M2_15650 {
             return;
         }
 
-        for(int i = num; i <= N; i++) {
-            if(!visited[i]) {
-                visited[i] = true;
-                arr[depth] = i;
-                dfs(i,depth + 1, N, M);
-                visited[i] = false;
-            }
+        for(int i = 1; i <= N; i++) {
+            arr[depth] = i;
+            dfs(depth+1, N, M);
         }
 
     }
