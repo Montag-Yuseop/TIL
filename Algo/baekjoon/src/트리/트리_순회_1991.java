@@ -79,7 +79,6 @@ public class 트리_순회_1991 {
     }
 
     static void insert(Node now, String value, String left, String right) {
-
         if(now.self.equals(value)) {
             now.left = left.equals(".") ? null : new Node(left, null, null);
             now.right = right.equals(".") ? null : new Node(right, null, null);
