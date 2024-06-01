@@ -56,7 +56,7 @@ CPU는 매 클럭마다 메모리 어딘가의 기계어를 연산한다
 
 따라서 하드웨어적 도움을 받아 CPU의 사용을 컨트롤한다
 
-#### FCFS(First Come First Serve)
+#### FCFS(First Come, First Served)
 
 먼저 온 것부터 처리
 
@@ -167,3 +167,55 @@ Starvation(기아 현상) 발생 가능:
 
 작고, 비 휘발성이며, 전기를 덜 잡아먹는다
 
+## 운영 체제의 분류
+
+### 동시 작업 가능 여부
+
+- 단일 작업(single tasking)</br>
+한 번에 하나의 작업(MS-DOS)
+
+- 다중 작업(multi tasking)</br>
+동시에 두 개 이상의 작업 처리(UNIX, MS Windows)
+
+### 사용자 수
+
+- 단일 사용자(single user)</br>
+한 명의 사용자(MS-DOS, MS Windows)
+
+- 다중 사용자(multi user)</br>
+여러 명의 사용자(UNIX, NT server)
+
+### 처리 방식
+
+- 일괄 처리(batch processing)
+  - 작업 요청의 일정량을 모아서 한 번에 처리
+  - 작업이 완전 종료될 때 까지 기다려야 함
+
+
+- 시분할(time sharing)
+  - 여러 작업을 수행할 때 컴퓨터 처리 능력을 일정 시간 단위로 분할하여 사용
+  - 일괄 처리에 비해 짧은 응답시간을 가짐
+  - interactive한 방식
+
+## 용어
+
+Multitasking: 여러 작업이 동시에 실행되는 것
+
+Multiprogramming: 여러 프로그램이 메모리 위에 올라가 있음
+
+Time sharing: CPU의 시간을 분할하여 나누어 쓴다는 의미
+
+Multiprocessor: 하나의 컴퓨터에 여러 CPU(Processor)가 붙어 있음
+
+### 운영 체제의 예
+
+#### UNIX
+
+- 코드 대부분을 C 언어로
+- 높은 이식성
+- 최소한의 커널
+- 복잡한 시스템에 맞게 확장 용이
+- 오픈 소스
+- 다양한 버전
+
+#### DOS
