@@ -1,3 +1,6 @@
 .idea
 build/
 leafy/
+/개발자를 위한 쉬운 도커/leafy/leafy-backend/Dockerfile
+/개발자를 위한 쉬운 도커/leafy/leafy-frontend/Dockerfile
+/개발자를 위한 쉬운 도커/leafy/leafy-postgresql/Dockerfile
