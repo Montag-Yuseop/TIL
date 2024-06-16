@@ -1,4 +1,4 @@
-package test;
+package 그리디;
 
 import java.io.BufferedReader;
 import java.io.IOException;
