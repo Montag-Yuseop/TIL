@@ -1,12 +1,13 @@
-package class4;
+package DP;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.StringTokenizer;
 
-public class 평범한_배낭_12865 {
-
+public class 평범한_배낭2_12920 {
   static class Node {
     int weight, value;
 
@@ -37,24 +38,37 @@ public class 평범한_배낭_12865 {
      */
 
     // 3. 배낭의 정보를 저장할 클래스와 배열 생성하기
-    Node[] items = new Node[N];
+    List<Node> list = new ArrayList<>();
 
     // 4. 배낭 정보 저장
     for (int i = 0; i < N; i++) {
       st = new StringTokenizer(br.readLine());
-      items[i] = new Node(Integer.parseInt(st.nextToken()), Integer.parseInt(st.nextToken()));
+      int v = Integer.parseInt(st.nextToken());
+      int c = Integer.parseInt(st.nextToken());
+      int k = Integer.parseInt(st.nextToken());
+      int n = 1;
+
+      while (n <= k) {
+        list.add(new Node(v * n, c * n));
+        k -= n;
+        n *= 2;
+      }
+
+      if (k != 0) {
+        list.add(new Node(v * k, c * k));
+      }
     }
 
     // 5. 값을 저장할 dp배열 생성
     // 행: 아이템의 개수
     // 열: 무게 값
     // 배열 값: 최대 가치
-    int[][] dp = new int[N + 1][K + 1];
+    int[][] dp = new int[list.size() + 1][K + 1];
 
     // 6. dp 배열의 값을 넣어주기
-    // 최대 100 * 100_000 이므로, 2억(2초)을 넘지 않음
-    for (int r = 1; r <= N; r++) {
-      Node cur = items[r - 1]; // 현재 노드 값
+
+    for (int r = 1; r < dp.length; r++) {
+      Node cur = list.get(r - 1); // 현재 노드 값
 
       for (int c = 1; c <= K; c++) {
         // 7. 현재 무게 인덱스 값이랑 현재 아이템 무게를 더한게 최대 무게를 넘어선 안됨
@@ -67,6 +81,6 @@ public class 평범한_배낭_12865 {
     }
 
     // 정답은 마지막까지 돌았을 때 최대 무게
-    System.out.println(dp[N][K]);
+    System.out.println(dp[list.size()][K]);
   }
 }
